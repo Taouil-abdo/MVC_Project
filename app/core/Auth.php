@@ -20,7 +20,7 @@ class Auth extends User {
             
             if(password_verify($password,$row['password'])){
     
-                    if($_SESSION['role'] == 'Admin'){
+                    if($_SESSION['role'] == 'admin'){
                         header("Location: ../../views/back.php");
                         exit;
                     }elseif($_SESSION['role'] == 'Teacher'){
@@ -42,12 +42,11 @@ class Auth extends User {
      {
      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-     $columns = "username, email, password, bio ,role";
-     $values = [$userName, $email, $hashedPassword, $bio ];
+     $columns = "username, email, password_hash, bio";
+     $values = [$userName, $email, $hashedPassword, $bio];
 
      $result= User::AddUser($columns, $values);
      return $result; 
-     var_dump($result);
      
    }
 
