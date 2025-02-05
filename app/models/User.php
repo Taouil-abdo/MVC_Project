@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\config\Database;
+use PDO;
 
 
 class User{

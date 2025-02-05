@@ -188,6 +188,74 @@
 
             </div>
         </div>
+
+        <div class="flex-col max-w-7xl px-4 sm:px-6">
+        <!-- tablue -->
+        <div class="container mx-auto p-4">
+            <!-- <div class="overflow-x-auto"> -->
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="py-2 px-4">title</th>
+                        <th class="py-2 px-4">featured_image</th>
+                        <th class="py-2 px-4">status</th>
+                        <th class="py-2 px-4">categorie_name</th>
+                        <th class="py-2 px-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                {% if articles %} 
+                       {% for article in articles %}
+                    <tr class="border-b">
+                        <td class="py-2 px-4">{{article}}</td>
+                        <td class="py-2 px-4"><img
+                                src="../../../asset/uploads/Articles/<?php echo $artByAuth['featured_image']?>"
+                                width="40px" alt="Player Image"></td>
+
+                        <?php if($artByAuth['status'] == 'draft') { ?>
+                        <td class="py-2 px-4 ">
+                            <div
+                                class="bg-orange-500 text-white h-10 w-[4rem] flex justify-center items-center rounded-lg">
+                                <?= $artByAuth['status']; ?></div>
+                        </td>
+                        <?php } ?>
+                        <?php if($artByAuth['status'] == 'published'){ ?>
+                        <td class="py-2 px-4 ">
+                            <div
+                                class="bg-green-500 text-white h-10 w-[5rem] flex justify-center items-center rounded-lg ">
+                                <?= $artByAuth['status']; ?></div>
+                        </td>
+                        <?php } ?>
+                        <?php if($artByAuth['status'] == 'scheduled'){ ?>
+                        <td class="py-2 px-4">
+                            <div
+                                class="bg-yellow-500 text-white h-10 w-[5rem] flex justify-center items-center rounded-lg">
+                                <?= $artByAuth['status']; ?></div>
+                        </td>
+                        <?php } ?>
+
+                        <td class="py-2 px-4"><?= $artByAuth['categorie_name']; ?></td>
+
+                        <td class="py-2 px-4">
+                            <a href="update.php?id=<?= $artByAuth['id']; ?>"
+                                class="text-blue-500 hover:underline"><i class="fa-solid fa-pencil"></i></a>
+                            |
+                            <a href="Article.php?Article_id=<?= $artByAuth['id']; ?>"
+                                onclick="return confirm('Are you sure you want to delete this Article ?')"
+                                class="text-red-500 hover:underline"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <?php
+          
+          } else {
+          echo "<tr><td colspan='8' class='py-2 px-4 text-center'>No data available</td></tr>";
+          }
+        ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
     </div>
 
     </div>

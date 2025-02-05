@@ -18,12 +18,21 @@ class Auth extends User {
             $_SESSION["username"] = $row['username'];
             $_SESSION["email"] = $row['email'];
             
-            if(password_verify($password,$row['password'])){
+            if(password_verify($password,$row['password_hash'])){
     
                     if($_SESSION['role'] == 'admin'){
-                        header("Location: ../../views/back.php");
+                        // View::render('back/home.twig');
+                        header("Location: /dashbaord");
+
+
                         exit;
-                    }elseif($_SESSION['role'] == 'Teacher'){
+                    }
+                    elseif($_SESSION['role'] == 'user'){
+                        header("Location: /");
+                        // View::render('front/home.twig');
+                        exit;        
+                    }
+                    elseif($_SESSION['role'] == 'author'){
                         header("Location: ../../views/front");
                         exit;        
                     }else{
